@@ -18,6 +18,7 @@ model User {
   
   accounts Account[]
   sessions Session[]
+  simulationSessions SimulationSession[]
 }
 
 model Account {
@@ -45,4 +46,21 @@ model Session {
   userId       String   @db.ObjectId
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Script {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  objection    String
+  rebuttals    String[]  // List of options
+  preferred    String    // The ideal rebuttal
+  createdAt    DateTime @default(now())
+}
+
+model SimulationSession {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  messages  Json     // Full conversation
+  startedAt DateTime @default(now())
+  endedAt   DateTime?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -61,11 +62,7 @@ export function LoginForm() {
     <Card className="w-full max-w-md border-0 shadow-2xl bg-white/80 backdrop-blur-sm">
       <CardHeader className="space-y-4 pb-8">
         <div className="flex justify-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
-            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-              <div className="w-4 h-4 bg-gradient-to-br from-blue-600 to-purple-600 rounded-sm"></div>
-            </div>
-          </div>
+          <Image src="/derby_logo.png" alt="VA Training Simulator" width={100} height={100} />
         </div>
         <div className="text-center space-y-2">
           <CardTitle className="text-2xl font-bold tracking-tight">Welcome back</CardTitle>

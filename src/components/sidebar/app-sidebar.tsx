@@ -43,6 +43,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 
 const adminNavItems = [
   {
@@ -69,8 +70,8 @@ const adminNavItems = [
         icon: Users,
       },
       {
-        title: "Scenarios",
-        url: "/admin/scenarios",
+        title: "Scripts",
+        url: "/admin/scripts",
         icon: BookOpen,
       },
     ],
@@ -167,8 +168,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <div className="flex items-center gap-2 px-2 py-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-purple-600">
-            <div className="h-4 w-4 rounded-sm bg-white"></div>
+          <div className="flex ">
+            <Image src="/derby_logo.png" alt="VA Training" width={32} height={32} />
           </div>
           <div className="grid flex-1 text-left text-sm leading-tight">
             <span className="truncate font-semibold">VA Training</span>
