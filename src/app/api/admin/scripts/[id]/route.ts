@@ -9,8 +9,9 @@ interface SessionUser {
 }
 
 // GET - Fetch a specific script
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = (await getServerSession(authOptions)) as { user: SessionUser } | null;
 
     if (!session?.user?.id || session.user.role !== "admin") {
@@ -18,7 +19,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     }
 
     const script = await prisma.script.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!script) {
@@ -33,8 +34,9 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 }
 
 // PUT - Update a script
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = (await getServerSession(authOptions)) as { user: SessionUser } | null;
 
     if (!session?.user?.id || session.user.role !== "admin") {
@@ -71,7 +73,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     }
 
     const script = await prisma.script.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         objection,
         rebuttals,
@@ -87,8 +89,9 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 }
 
 // DELETE - Delete a script
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = (await getServerSession(authOptions)) as { user: SessionUser } | null;
 
     if (!session?.user?.id || session.user.role !== "admin") {
@@ -96,7 +99,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     }
 
     await prisma.script.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ success: true });
